@@ -1,4 +1,4 @@
-"""Lab 14 portfolio baselines. Run with: python portfolio.py"""
+"""Portfolio calculations and monthly adjusted-price validation from Labs 14–15."""
 
 from math import isclose, isfinite, sqrt
 import csv
@@ -6,43 +6,6 @@ from datetime import date
 from io import StringIO
 from pathlib import Path
 from statistics import mean, stdev, correlation
-
-
-# Editable course training inputs, not market estimates.
-# Returns, volatilities and weights are decimals: 0.035 means 3.5%.
-# The order here also sets the rows and columns of CORRELATIONS.
-SLEEVES = [
-    {"name": "Treasury bills", "return": 0.035, "volatility": 0.005,
-     "reserve_eligible": True},
-    {"name": "Treasury 10-year note", "return": 0.043, "volatility": 0.070,
-     "reserve_eligible": True},
-    {"name": "Investment-grade bond fund", "return": 0.050, "volatility": 0.060,
-     "reserve_eligible": False},
-    {"name": "Global equity index fund", "return": 0.080, "volatility": 0.160,
-     "reserve_eligible": False},
-]
-
-#  The row and column order is:
-
-#   0 = Bills
-#   1 = 10-year Treasury
-#   2 = IG bonds
-#   3 = Equity
-
-CORRELATIONS = [
-    [1.00, 0.10, 0.05, 0.00],
-    [0.10, 1.00, 0.80, -0.10],
-    [0.05, 0.80, 1.00, 0.25],
-    [0.00, -0.10, 0.25, 1.00],
-]
-
-
-CPI_ESTIMATE = 0.025  # Labelled estimate used by the lab.
-OBJECTIVE_RETURN = CPI_ESTIMATE + 0.04  # CPI + 4% = 6.5%.
-BENCHMARK_ALLOCATIONS = {
-    "Investment-grade bond fund": 0.40,
-    "Global equity index fund": 0.60,
-}
 
 
 def validate_inputs(sleeves, correlations):
@@ -126,7 +89,7 @@ def weight_grid(asset_count, remaining=20, prefix=()):
             yield from weight_grid(asset_count - 1, remaining - units, (*prefix, units))
 
 
-def search_portfolio(sleeves, correlations, objective_return, reserve_minimum):
+def search_portfolio(sleeves, correlations, objective_return, reserve_minimum, annual_cost=0):
     """Return the minimum-volatility feasible 5-point grid mix, or None.
 
     In an exact risk tie, keep the first mix in deterministic grid order.
@@ -138,6 +101,8 @@ def search_portfolio(sleeves, correlations, objective_return, reserve_minimum):
         raise ValueError("Objective return must be finite.")
     if not isfinite(reserve_minimum) or not 0 <= reserve_minimum <= 1:
         raise ValueError("Reserve minimum must be between 0% and 100%.")
+    if not isfinite(annual_cost) or annual_cost < 0:
+        raise ValueError("Annual cost must be finite and nonnegative.")
     covariance = covariance_matrix(sleeves, correlations)
     best = None
     evaluated = feasible = 0
@@ -146,7 +111,7 @@ def search_portfolio(sleeves, correlations, objective_return, reserve_minimum):
         result = expected_return(weights, sleeves)
         reserve = reserve_weight(weights, sleeves)
         # Tiny tolerance prevents binary rounding from rejecting an exact boundary.
-        if result < objective_return - 1e-12 or reserve < reserve_minimum - 1e-12:
+        if result - annual_cost < objective_return - 1e-12 or reserve < reserve_minimum - 1e-12:
             continue
         feasible += 1
         volatility = portfolio_volatility(weights, covariance)
@@ -158,13 +123,8 @@ def search_portfolio(sleeves, correlations, objective_return, reserve_minimum):
     return best
 
 
-def estimate_from_csv(source, last_36=False):
-    """Estimate annual return/risk from monthly adjusted prices, standard library only.
-
-    source: path, uploaded file-like object, or UTF-8 bytes.
-    Last 36 means 36 RETURNS, using 37 prices. Sample standard deviation
-    uses n-1. Return estimates are arithmetic mean * 12, not CAGR.
-    """
+def read_monthly_prices(source):
+    """Parse aligned positive prices and reject gaps, duplicates and non-monthly rows."""
     if isinstance(source, (str, Path)):
         text = Path(source).read_text(encoding="utf-8-sig")
     else:
@@ -196,6 +156,12 @@ def estimate_from_csv(source, last_36=False):
         prices.append(values)
     if len(prices) < 3:
         raise ValueError("At least three monthly prices are needed to estimate risk.")
+    return names, dates, prices
+
+
+def estimate_from_csv(source, last_36=False):
+    """Estimate annual arithmetic return and sample risk from monthly adjusted closes."""
+    names, dates, prices = read_monthly_prices(source)
     returns = [[now[i] / before[i] - 1 for i in range(len(names))]
                for before, now in zip(prices, prices[1:])]
     if last_36:
@@ -227,35 +193,3 @@ def largest_weight_change(first, second):
     if len(first["weights"]) != len(second["weights"]):
         raise ValueError("Compare portfolios with the same asset order.")
     return max(abs(a - b) for a, b in zip(first["weights"], second["weights"])) * 100
-
-
-def main():
-    covariance = covariance_matrix(SLEEVES, CORRELATIONS)
-    portfolios = {
-        "Benchmark": benchmark_weights(SLEEVES, BENCHMARK_ALLOCATIONS),
-        "Equal weight": equal_weights(SLEEVES),
-        "Inverse volatility": inverse_volatility_weights(SLEEVES),
-    }
-    print("Lab 14 - Portfolio baselines (course training inputs)")
-    print(f"Objective: {OBJECTIVE_RETURN:.1%} (CPI estimate: {CPI_ESTIMATE:.1%} + 4.0%)")
-    for name, weights in portfolios.items():
-        if len(weights) != len(SLEEVES) or any(weight < 0 for weight in weights) or not isclose(
-            sum(weights), 1.0, rel_tol=0, abs_tol=1e-12
-        ):
-            raise ValueError(f"{name}: weights must be nonnegative and sum to 100%.")
-        result = expected_return(weights, SLEEVES)
-        print(f"\n{name}")
-        for sleeve, weight in zip(SLEEVES, weights):
-            print(f"  {sleeve['name']}: {weight:.1%}")
-        print(f"  Expected return: {result:.2%}")
-        print(f"  Volatility: {portfolio_volatility(weights, covariance):.2%}")
-        print(f"  Reserve-eligible weight: {reserve_weight(weights, SLEEVES):.1%}")
-        print(f"  Meets {OBJECTIVE_RETURN:.1%} objective: "
-              f"{'yes' if meets_objective(result, OBJECTIVE_RETURN) else 'no'}")
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except ValueError as error:
-        raise SystemExit(f"Input error: {error}") from None
