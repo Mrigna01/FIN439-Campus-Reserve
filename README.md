@@ -6,7 +6,7 @@ The app helps the investment committee of a fictional $1 million scholarship res
 
 ## Start from a fresh clone
 
-Use Python 3.13, Git, and a browser. On macOS or Linux, use a shell with Python 3.13 on the path. Check the version before creating the environment. On Windows, use `py -3.13` to create it and `.venv\Scripts\Activate.ps1` in PowerShell.
+Authenticate to GitHub with an account that has access to this private repository. Use Python 3.13, Git, and a browser. On macOS or Linux, use a shell with Python 3.13 on the path. Check the version before creating the environment. On Windows, use `py -3.13` to create it and `.venv\Scripts\Activate.ps1` in PowerShell.
 
 ```sh
 git clone https://github.com/Mrigna01/FIN439-Campus-Reserve.git

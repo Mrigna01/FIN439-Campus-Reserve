@@ -15,6 +15,8 @@ The parser uses the last observed adjusted close of each month. Monthly simple r
 
 The 2.50% inflation input is inherited from the lab and isolates portfolio effects. The BLS CPI measures changes in consumer prices. The case assumption is not a BLS forecast. The historical 3.72% SGOV and 11.90% VT arithmetic estimates are descriptive. Treasury reinvestment, equity drawdowns and the differing sample windows argue against underwriting either estimate as a forward rate. Before funding, obtain current Treasury reinvestment yields, an approved forward equity assumption and executable cost estimates. The benchmark is a fixed Lab 14 comparison of global equity and corporate credit. It omits a dedicated reserve sleeve by construction. [BLS CPI](https://www.bls.gov/cpi/) · [Original benchmark](https://github.com/Mrigna01/FIN439Project2/blob/15a6d0a3dd1bf883e264aa1d3a0f18596ad5c03b/lab14.md)
 
+As a cross-check, the U.S. Treasury's September 30, 2026 coupon-equivalent yield for a 13-week bill was 4.13%. That is a relevant reinvestment reference for SGOV's short maturity, with a different measurement basis than its 3.72% five-year historical fund estimate. The October 14 BLS release reported September 12-month CPI-U inflation of 3.7%, above the 2.50% case input. That realized reading is not a five-year inflation expectation. The comparisons explain why the modeled hurdle and historical returns should be reviewed before allocating capital. Neither source feeds the optimizer. [Treasury September 2026 bill rates](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_bill_rates) · [BLS September CPI release](https://www.bls.gov/news.release/archives/cpi_10142026.htm)
+
 ## Point-in-time data card
 
 - **Feature and source.** Real VT USD adjusted-close ratio over 12 months, less one, from the same archived Yahoo snapshot. It is a total-return proxy.
@@ -31,6 +33,22 @@ The [generated report](../data/decision-output.md) uses the same engine as the a
 **Pending human AI-off prediction and run.** The 17 bp cost case is reserved and has not been run. See the [prediction worksheet](locked-prediction-template.md).
 
 The [original prediction commit](https://github.com/Mrigna01/FIN439Project2/commit/5e4320622c5c438109794c43b3cbd900791dbf50) is timestamped November 17 at 21:10:38 UTC and explicitly identifies the 4% to 80% prediction as AI-assisted. The [results commit](https://github.com/Mrigna01/FIN439Project2/commit/947645ac1cbe8e013a99fca9087673b6bc60be93) already contained results at 21:11:49 UTC. The [later prediction edit](https://github.com/Mrigna01/FIN439Project2/commit/af9bd3b5117bb19c18b0dd6ea792ea439ebc6e88) changed the wording at 21:34:14 UTC after the results existed. None establishes an AI-off prediction. This package does not rely on the later lab narrative as proof of a human partner run.
+
+## Execution and cold run
+
+On November 17, 2026, Codex ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH. This was an agent run.
+
+| Command or check | Result | Wall time |
+|---|---|---:|
+| `git clone` | New folder from the private GitHub remote | 0.59 s |
+| `python3.13 -m venv .venv` | Created an independent environment | 1.75 s |
+| `python -m pip install -r requirements.txt` | Installed successfully | 10.59 s |
+| `python -m unittest discover -s tests -v` | 10 passed, including interactive Streamlit default, cost and reserve checks | 13.32 s |
+| `python report.py` followed by `cmp` | Regenerated report matched checked-in output byte for byte | 0.06 s for regeneration |
+| `python -m streamlit run app.py` headless on localhost | Health endpoint and root page returned successfully | 0.60 s to health response |
+| Whole cold run | Passed | 27.53 s |
+
+The earlier development run caught Streamlit resolving the test script path relative to the test file. Resolving the app path from the project root fixed it. The fresh run covered exact cost and reserve boundaries, the two baseline failures, weight validity, a hand-worked covariance example, bad price inputs, exclusion before vintage availability, an infeasible reserve floor, and report/app agreement on decision numbers. It does not verify human partner participation, grader access, or market execution.
 
 ## Material AI uses
 
