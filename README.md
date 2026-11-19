@@ -1,6 +1,6 @@
 # Campus Scholarship Reserve
 
-This is for education, not investment advice.
+I used ChatGPT through Codex to adapt the app, and check calculations. I am responsible for the analysis and committee decision. This is for education, not investment advice.
 
 The app helps the investment committee of a fictional $1 million scholarship reserve decide whether to pilot a portfolio process. The recommendation is a **paper pilot of 75% SGOV and 25% VT**, with funding held until return assumptions, costs and open mandate checks are verified. [Decision memo](docs/decision-memo.md) · [Executed results](data/decision-output.md)
 
