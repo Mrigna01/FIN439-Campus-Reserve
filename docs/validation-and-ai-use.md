@@ -46,6 +46,41 @@ The net-return target is 5.50%. I expect the original portfolio to remain above 
 Expected committee action:
 I would continue the paper pilot with funding held. The modeled return and reserve checks should still pass, but forward return assumptions and operational mandate checks still need verification.
 
+Prediction snapshot:
+https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/27d745222fe4b6c37c0058303c4ae071a6f1e398
+
+### Actual practice results and comparison
+
+Execution timestamp recorded before run (UTC): 2026-11-19T22:41:22Z
+Elapsed time: 0.073 seconds
+
+Command:
+`python report.py --cost-bp 17 > data/locked-cost-result.md`
+
+Actual result:
+Increasing annual cost from 10 to 17 bp reduced the
+original portfolio’s estimated net return from 5.66%
+to 5.59%, a decrease of 0.07 percentage points.
+The optimized allocation remained 75% SGOV and 25% VT.
+Annual volatility remained 3.82%, and eligible reserves
+remained 75%. Feasible grid allocations decreased
+from 392 to 380 out of 1,771.
+
+Comparison with prediction:
+The result matched the practice prediction. The uniform
+cost increase reduced net return without changing estimated
+risk. The original minimum-volatility allocation still
+passed the return hurdle, so it remained the selected mix.
+
+Decision impact:
+Continue the paper pilot with funding held. The estimated
+net return remains approximately 0.09 percentage points
+above the 5.50% target. Operational mandate checks and
+forward return assumptions still need verification.
+
+Evidence:
+[Actual experiment output](../data/locked-cost-result.md)
+[Default baseline](../data/decision-output.md)
 
 The [original prediction commit](https://github.com/Mrigna01/FIN439Project2/commit/5e4320622c5c438109794c43b3cbd900791dbf50) is timestamped November 17 at 21:10:38 UTC and explicitly identifies the 4% to 80% prediction as AI-assisted. The [results commit](https://github.com/Mrigna01/FIN439Project2/commit/947645ac1cbe8e013a99fca9087673b6bc60be93) already contained results at 21:11:49 UTC. The [later prediction edit](https://github.com/Mrigna01/FIN439Project2/commit/af9bd3b5117bb19c18b0dd6ea792ea439ebc6e88) changed the wording at 21:34:14 UTC after the results existed. None establishes an AI-off prediction. This package does not rely on the later lab narrative as proof of a human partner run.
 
