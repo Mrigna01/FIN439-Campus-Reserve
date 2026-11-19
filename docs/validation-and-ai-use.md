@@ -29,8 +29,23 @@ As a cross-check, the U.S. Treasury's September 30, 2026 coupon-equivalent yield
 The [generated report](../data/decision-output.md) uses the same engine as the app. One change at a time is applied to the 60-return, 10 bp, 4%-reserve case. The fixed check answers whether the original pilot survives; the fresh search answers whether a different five-point allocation qualifies. Lower VT estimates and higher costs separately fail the original mix. The 36-return window keeps the original feasible and changes the lowest-risk weights. The 80% reserve stress has no feasible result. An unchecked mandate rule remains open across all scenarios.
 
 ## Locked Changed-Input Record
+Authored at (UTC): 2026-11-19T22:23:08Z 
 
-**Pending human AI-off prediction and run.** The 17 bp cost case is reserved and has not been run. See the [prediction worksheet](locked-prediction-template.md).
+Input change:
+Additional annual cost increases from 10 bp to 17 bp. All other default inputs remain fixed.
+
+Expected fixed-weight net return:
+I expect net return to decrease by 0.07 percentage points, from approximately 5.66% to 5.59%, because the additional annual cost increases by 7 basis points.
+
+Expected optimized allocation and risk:
+I expect the allocation to remain 75% SGOV and 25% VT, with annual volatility around 3.82%. The original minimum-volatility portfolio should still meet the return target, and the uniform cost increase does not change the risk estimates.
+
+Decision threshold:
+The net-return target is 5.50%. I expect the original portfolio to remain above it, with a smaller cushion of approximately 0.09 percentage points.
+
+Expected committee action:
+I would continue the paper pilot with funding held. The modeled return and reserve checks should still pass, but forward return assumptions and operational mandate checks still need verification.
+
 
 The [original prediction commit](https://github.com/Mrigna01/FIN439Project2/commit/5e4320622c5c438109794c43b3cbd900791dbf50) is timestamped November 17 at 21:10:38 UTC and explicitly identifies the 4% to 80% prediction as AI-assisted. The [results commit](https://github.com/Mrigna01/FIN439Project2/commit/947645ac1cbe8e013a99fca9087673b6bc60be93) already contained results at 21:11:49 UTC. The [later prediction edit](https://github.com/Mrigna01/FIN439Project2/commit/af9bd3b5117bb19c18b0dd6ea792ea439ebc6e88) changed the wording at 21:34:14 UTC after the results existed. None establishes an AI-off prediction. This package does not rely on the later lab narrative as proof of a human partner run.
 
