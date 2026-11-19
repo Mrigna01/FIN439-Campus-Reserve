@@ -1,11 +1,5 @@
 # Locked changed-input prediction worksheet
 
-Reserved experiment: change the additional annual cost from 10 to 17 basis points. Keep all other default inputs fixed. The 17 bp scenario is reserved for your AI-off run.
+The 17 bp scenario was executed on November 19, 2026. The run increased the additional annual cost from 10 to 17 basis points and kept all other default inputs fixed. Estimated net return fell from 5.66% to 5.59%, and the selected allocation stayed at 75% SGOV and 25% VT.
 
-Close AI and write your own prediction below. Put the completed text in the Locked Changed-Input Record in `docs/validation-and-ai-use.md`. Record the UTC time, commit the prediction and push it to GitHub before touching the app control or executing the experiment. With AI still closed, run `python report.py --cost-bp 17 > data/locked-cost-result.md`. Preserve the default report, prediction commit URL, and experiment output. Then explain the actual result and compare it with your prediction.
-
-- Authored at (UTC):
-- Old and new input with units:
-- Expected movement and numerical magnitude or range for fixed-weight net return and optimized weights or volatility:
-- Decision threshold affected:
-- Expected action before seeing the result, with financial reasoning:
+See the [Locked Changed-Input Record](validation-and-ai-use.md#locked-changed-input-record) for the prediction snapshot, execution details, and decision impact. The [default report](../data/decision-output.md) and the [17 bp report](../data/locked-cost-result.md) show the before-and-after results.

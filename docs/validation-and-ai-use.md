@@ -54,6 +54,8 @@ https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/27d745222fe4b6c37c00583
 Execution timestamp recorded before run (UTC): 2026-11-19T22:41:22Z
 Elapsed time: 0.073 seconds
 
+The 17 bp report ran from the Campus Reserve repository using Python 3.13.18 in the original lab project's virtual environment (`FIN439Project2/.venv`).
+
 Command:
 `python report.py --cost-bp 17 > data/locked-cost-result.md`
 
