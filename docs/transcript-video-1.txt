@@ -1,0 +1,20 @@
+FIN 439 Project 2 — Video 1: Project Evolution and AI Check
+https://youtu.be/Q4MI_WwdOfk
+
+[00:00] Hello, this is Mrigna, and this is my video one for project two.
+[00:06] I use ChatGPT through Codex to adapt the app and check calculations. I am responsible for the analysis and
+[00:14] committee decision. This is for education, not investment advice.
+[00:23] This is my app, and this is the portfolio comparison table. In Lab 15, I was comparing two optimizer runs to see how
+[00:31] sensitive the weights were. For the final app, I wanted the committee to see what it would give up by choosing a simpler portfolio. So I added equal
+[00:40] weight and a fixed 60/40 benchmark and applied the same rules to all three. Equal weight comes in at 3.76% net and
+[00:48] misses the return target. The benchmark clears the return target, but it holds zero eligible reserves.
+[01:02] One Codex-assisted result I checked was whether my original allocation still worked if VT's estimated annual return
+[01:10] dropped by one percentage point. The earlier calculation showed 5.51% before additional client costs.
+[01:28] VT is 25% of the original portfolio. So a one-point drop in VT takes a quarter of a percentage point off the portfolio
+[01:36] return. Then I subtract 10 basis points in annual client costs. That takes 5.51%
+[01:45] down to 5.41% net. The app reproduces that result, and the original mix now falls below the 5.5% net hurdle.
+[01:58] The optimizer can still find a mix that clears the hurdle, but it does that by raising VT from 25% to 30%. That also
+[02:07] increases estimated volatility from 3.82% to 4.55%.
+[02:13] That changed what I was willing to recommend. I'd test the original 75/25 mix on paper and hold funding. I later
+[02:21] added a forward-return comparison, and the original mix came in at 4.12% net under those assumptions. That
+[02:30] reinforced the decision to hold funding.

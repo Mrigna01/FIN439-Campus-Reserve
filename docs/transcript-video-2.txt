@@ -1,0 +1,28 @@
+FIN 439 Project 2 — Video 2: Code Walkthrough
+https://youtu.be/CKZOpya6DlE
+
+[00:00] Hi, this is video two for my project two. I use ChatGPT through Codex to help adapt the app and check calculations. I'm responsible for the analysis and committee recommendation.
+[00:10] This project is for education, not investment advice.
+[00:21] These controls take the inputs from the Streamlit sidebar. The app and the command-line report use the same portfolio engine, so both can reproduce the decision from the same inputs.
+[00:31] This is prices.csv. This is where our data rows are stored.
+[00:51] This is the saved adjusted-close price file. 61 monthly prices per fund give me 60 monthly returns. The last price
+[00:57] observation is September 30, and the archive was retrieved October 22. Both dates are before the November 17 historical decision date.
+[01:16] Each monthly return is the current adjusted close divided by the previous month's adjusted close, minus one. I multiply the
+[01:24] average monthly return by 12 to get the annualized estimate. The portfolio's net return is the weighted average of the fund estimates minus the additional annual client cost.
+[01:44] Portfolio volatility uses the covariance matrix, so it accounts for how the funds move together.
+[01:56] The search tries fully invested, long-only mixes in five-percentage-point increments. It screens for at least 5.5%
+[02:03] estimated net return and 4% eligible reserves, then picks the qualifying mix with the lowest estimated volatility.
+[02:09] Equal weight and the fixed 60/40 benchmark go through the same modeled checks.
+[02:23] The historical VT signal compares the latest adjusted close with the adjusted close 12 months earlier. It comes out to 16.45%. A missing or nonpositive signal
+[02:31] sends the paper pilot back for review while keeping the weights the same.
+[02:45] The forward scenario replaces the historical average returns with sourced forward assumptions. It keeps historical covariance for the risk calculation.
+[03:00] Now I'm going to run a few commands to prove that the reports reproduce.
+[03:15] Run.
+[03:20] The test suite passes. I also regenerate both reports from the saved inputs.
+[03:24] These two comparisons confirm that the regenerated outputs match the files in the repository directly.
+[03:44] At 30 basis points of annual cost, the original allocation falls to 5.46% net, below the 5.5% hurdle. The optimizer
+[03:52] finds a qualifying mix by raising VT to 30%.
+[03:57] I'd bring that allocation change back to the committee for review.
+[04:17] It says, "No feasible mix on the five-percentage-point grid." With costs back at 10 basis points and the reserve floor
+[04:24] raised to 80%, the app finds no qualifying mix on the grid. At that point, I'd stop and bring the mandate back to the committee. Even when a mix does
+[04:31] pass, I still need custodian evidence to confirm five-business-day liquidity.

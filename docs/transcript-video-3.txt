@@ -1,0 +1,30 @@
+FIN 439 Project 2 — Video 3: Committee Presentation
+https://youtu.be/q4kyKkujF4w
+
+[00:00] Hi, this is video three for my project two. This project is for education, not investment advice. I'm asking the committee to approve a paper pilot of
+[00:08] 75% SGOV and 25% VT and hold funding for now.
+[00:17] The fictional $1 million fund pays $10,000 in scholarships each quarter.
+[00:22] Its goal is to earn inflation plus 3% annually after costs over rolling five-year periods. With illustrative inflation of two
+[00:31] and a half percent, the app uses a 5.50% net return target and a 4% eligible reserve
+[00:38] floor. Equal weight misses the return target. The 60/40 benchmark clears the return target but holds zero eligible reserves.
+[00:47] The proposed 75/25 mix clears both checks with an
+[00:54] estimated net return of 5.66% and an annual volatility of 3.82%.
+[01:01] That's only 16 basis points above the return target.
+[01:07] I change the annual cost to 30.
+[01:16] If annual costs rise to 30 basis points, the original mix drops to 5.46% net, below
+[01:25] the target. The optimizer responds by increasing VT to 30%.
+[01:31] In the shorter historical window, the model goes the other way to 10% VT. So across these feasible historical cases,
+[01:39] I'd monitor a range of 70% to 90% SGOV and 10% to 30% VT during the paper pilot.
+[01:47] Any change to an actual allocation would come back to the committee for approval.
+[01:55] Resetting this back to 10. With illustrative forward returns and
+[02:02] the same 10-basis-point annual cost, the original mix falls to 4.12%
+[02:10] net. The new mix barely clears the target at 5.51%.
+[02:16] It puts 75% into investment-grade corporate bonds, and its estimated volatility rises to 7.79%.
+[02:28] The illustrative rebalance also requires approval because turnover reaches 65%.
+[02:35] That reinforces my decision to hold funding. I'd also verify the actual payment dates, cash balances, and custodian cutoffs because a settlement
+[02:44] delay could leave the first scholarship payment short. During the pilot,
+[02:54] I'd monitor net return, eligible reserves, costs, and scholarship payment timing. If estimated net return falls below five and a
+[03:02] half percent or eligible reserves fall below the required floor, I'd stop and bring the mandate back to the committee. I'd also
+[03:10] pause if the VT trend signal turns nonpositive or becomes unavailable. Before requesting funding, I'd verify
+[03:18] the forward assumptions, trading costs, five-business-day liquidity, issuer exposure, and turnover. My request today
+[03:26] is to approve the paper pilot and hold funding.
