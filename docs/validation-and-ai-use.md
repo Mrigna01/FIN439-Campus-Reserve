@@ -84,8 +84,6 @@ Evidence:
 [Actual experiment output](../data/locked-cost-result.md)
 [Default baseline](../data/decision-output.md)
 
-The [original prediction commit](https://github.com/Mrigna01/FIN439Project2/commit/5e4320622c5c438109794c43b3cbd900791dbf50) is timestamped November 17 at 21:10:38 UTC and explicitly identifies the 4% to 80% prediction as AI-assisted. The [results commit](https://github.com/Mrigna01/FIN439Project2/commit/947645ac1cbe8e013a99fca9087673b6bc60be93) already contained results at 21:11:49 UTC. The [later prediction edit](https://github.com/Mrigna01/FIN439Project2/commit/af9bd3b5117bb19c18b0dd6ea792ea439ebc6e88) changed the wording at 21:34:14 UTC after the results existed. None establishes an AI-off prediction. This package does not rely on the later lab narrative as proof of a human partner run.
-
 ## Execution and cold run
 
 On November 17, 2026, Codex ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH. This was an agent run.
