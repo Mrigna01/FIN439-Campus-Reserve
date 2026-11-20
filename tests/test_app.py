@@ -3,6 +3,7 @@ from pathlib import Path
 import unittest
 
 from streamlit.testing.v1 import AppTest
+from operations import PAYMENT_ILLUSTRATION_NOTE, PAYMENT_READINESS
 from report import render
 
 
@@ -26,31 +27,49 @@ class AppTests(unittest.TestCase):
     def test_operational_detail_matches_report_and_reacts_to_controls(self):
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
         self.assertFalse(app.exception)
-        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
         self.assertIn(detail, render())
         self.assertIn("20.00% one-way turnover", detail)
+        mandate = app.table[1].value.set_index("Rule")
+        self.assertEqual(mandate.loc[PAYMENT_READINESS, "Constrained"], "Not established")
+        self.assertEqual(mandate.loc["Standalone scholarship payment illustration", "Constrained"],
+                         "Passes under stated assumptions")
 
         chooser = next(widget for widget in app.selectbox if widget.label == "Portfolio for operational review")
         chooser.set_value("60/40 benchmark").run()
-        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
-        self.assertIn("**Scholarship payments · Fails.**", detail)
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
+        self.assertIn("**Standalone scholarship payment illustration · Fails.**", detail)
         self.assertIn("70.00% one-way turnover", detail)
 
-        opening = next(widget for widget in app.number_input if widget.label == "Opening available cash (USD)")
+        opening = next(widget for widget in app.number_input
+                       if widget.label == "Opening cash for standalone payment illustration (USD)")
+        comparison = app.table[0].value.copy()
+        opening.set_value(1_000_000.0).run()
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
+        self.assertIn(PAYMENT_ILLUSTRATION_NOTE, detail)
+        self.assertIn(PAYMENT_ILLUSTRATION_NOTE, [caption.value for caption in app.caption])
+        self.assertIn(r"invested balance \$0.00", detail)
+        self.assertIn(r"Initial eligible-security balance \$0.00", detail)
+        self.assertTrue(comparison.equals(app.table[0].value))
+        self.assertEqual(app.table[1].value.set_index("Rule").loc[PAYMENT_READINESS, "Constrained"],
+                         "Not established")
+
+        opening = next(widget for widget in app.number_input
+                       if widget.label == "Opening cash for standalone payment illustration (USD)")
         opening.set_value(40_000.0).run()
-        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
-        self.assertIn("**Scholarship payments · Passes under stated assumptions.**", detail)
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
+        self.assertIn("**Standalone scholarship payment illustration · Passes under stated assumptions.**", detail)
 
         payment = next(widget for widget in app.date_input if widget.label == "Illustrative payment 1")
         payment.set_value(date(2027, 3, 16)).run()
-        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
         self.assertIn("| 2027-03-16 |", detail)
 
         for label, value in (("Starting SGOV (%)", 50.0), ("Starting VT (%)", 30.0)):
             next(widget for widget in app.number_input if widget.label == label).set_value(value)
         chooser = next(widget for widget in app.selectbox if widget.label == "Portfolio for operational review")
         chooser.set_value("Constrained").run()
-        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Standalone scholarship payment illustration"))
         self.assertIn("25.00% one-way turnover", detail)
 
         lookback = next(widget for widget in app.selectbox if widget.label == "Lookback")

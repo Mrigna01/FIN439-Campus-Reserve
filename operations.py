@@ -11,9 +11,15 @@ ASSUMED = "Passes under stated assumptions"
 VERIFIED = "Verified against dated evidence"
 UNKNOWN = "Not established"
 FAIL = "Fails"
+PAYMENT_ILLUSTRATION_NOTE = (
+    "This is a standalone payment-planning illustration. Opening cash is deducted from the illustrative ETF "
+    "holdings used in this schedule only. It does not update the main portfolio’s allocation, return, risk, "
+    "reserve dollars, turnover, or liquidity assessment. These outputs describe separate scenarios and must not be combined."
+)
 EVIDENCE_PATH = Path(__file__).resolve().parent / "data/operational-evidence.json"
+PAYMENT_READINESS = "Portfolio payment readiness"
 RULES = (
-    "Scholarship payment-date cash availability",
+    "Standalone scholarship payment illustration",
     "Corporate issuer exposure ≤ 8% under case exemptions",
     "Illustrative rebalance turnover (approval above 25%)",
     "At least 90% redeemable within five business days",
@@ -154,7 +160,8 @@ def assess(weights, eligible, capital, payout, assumptions, evidence, fallback_p
     funds = evidence["funds"]
     if assumptions.opening_cash > capital:
         raise ValueError("Illustrative opening cash cannot exceed the reserve capital.")
-    holdings = {ticker: weights[ticker] * (capital - assumptions.opening_cash)
+    invested = capital - assumptions.opening_cash
+    holdings = {ticker: weights[ticker] * invested
                 for ticker in eligible if weights[ticker]}
     cash_args = (holdings, assumptions.payment_dates, assumptions.opening_cash, payout)
     cash = {label: cash_schedule(*cash_args, **kwargs) for label, kwargs in (
@@ -164,9 +171,12 @@ def assess(weights, eligible, capital, payout, assumptions, evidence, fallback_p
     turnover = rebalance(weights, assumptions.starting_weights, capital)
     market = liquidity(weights, capital, funds, fallback_prices)
     status = cash_status(cash["Normal"])
-    return {"cash": cash, "issuer": issuer, "turnover": turnover, "liquidity": market,
-            "checks": dict(zip(RULES, (status, issuer["status"], turnover["status"],
-                                      UNKNOWN, UNKNOWN, UNKNOWN), strict=True))}
+    return {"cash": cash, "cash_balances": {"opening": assumptions.opening_cash, "invested": invested,
+                                          "eligible": sum(holdings.values()), "total": capital},
+            "issuer": issuer, "turnover": turnover, "liquidity": market,
+            "checks": {**dict(zip(RULES, (status, issuer["status"], turnover["status"],
+                                         UNKNOWN, UNKNOWN, UNKNOWN), strict=True)),
+                       PAYMENT_READINESS: UNKNOWN}}
 
 
 def cash_status(rows):
@@ -188,10 +198,16 @@ def operational_detail(result, evidence, price_date):
     cash, issuer, turnover, market = (result[key] for key in ("cash", "issuer", "turnover", "liquidity"))
     checks = result["checks"]
     funds = evidence["funds"]
+    balances = result["cash_balances"]
     lines = [
-        f"**Scholarship payments · {checks[RULES[0]]}.** Four illustrative quarters use separate cash funded "
-        "from the USD 1 million reserve, with ETF weights applied to the remainder. Each sale targets USD 10,000 in "
-        "pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.",
+        f"**Standalone scholarship payment illustration · {checks[RULES[0]]}.**",
+        f"**{PAYMENT_READINESS} · {checks[PAYMENT_READINESS]}.**",
+        PAYMENT_ILLUSTRATION_NOTE,
+        f"Illustrative opening cash {money(balances['opening'])} + invested balance {money(balances['invested'])} "
+        f"= total {money(balances['total'])}. Initial eligible-security balance {money(balances['eligible'])} "
+        "is part of the invested balance. The selected mix’s ETF weights apply to the remaining illustrative invested balance.",
+        "Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining "
+        "holdings. No automatic top-up or sale of other ETFs.",
         "Sales are planned two weekdays early. Weekend payments roll forward to Monday. An illustrative weekday calendar "
         "omits exchange and banking holidays, cutoffs and transfer delays. Normal proceeds are usable at T+1, "
         f"consistent with standard [ETF settlement]({evidence['settlement']}). Delay assumes T+3; "
@@ -203,7 +219,7 @@ def operational_detail(result, evidence, price_date):
         lines.extend([f"**{label} · {cash_status(rows)}**", markdown_table(
             ("Payment", "Opening cash", "Sale date", "Sale at reference prices", "Proceeds", "Available",
              "Newly available cash", "Due", "Paid", "Closing cash", "Shortfall"),
-            ((str(row["payment"]), money(row["opening"]), str(row["trade"]),
+            ((str(row["payment"]), money(row["opening"]), str(row["trade"]) if row["sales"] else "—",
               ", ".join(f"{ticker} {money(value)}" for ticker, value in row["sales"].items()) or "—",
               money(row["proceeds"]), str(row["available"]) if row["proceeds"] else "—",
               money(row["settled"]), money(row["due"]), money(row["paid"]),

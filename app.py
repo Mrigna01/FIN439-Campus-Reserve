@@ -3,7 +3,7 @@
 import streamlit as st
 
 from campus import DEFAULT, Inputs, STARTING_CAPITAL, TICKERS, load_snapshot, run, stress_action, stress_results
-from operations import Assumptions, load_evidence, operational_detail
+from operations import Assumptions, PAYMENT_ILLUSTRATION_NOTE, load_evidence, operational_detail
 from portfolio import largest_weight_change
 from report import summary
 
@@ -21,8 +21,10 @@ with st.sidebar:
     st.caption("The 5.50% net target holds across scenarios.")
     with st.expander("Illustrative operational inputs"):
         defaults = Assumptions()
-        opening_cash = st.number_input("Opening available cash (USD)", 0.0, float(STARTING_CAPITAL),
+        opening_cash = st.number_input("Opening cash for standalone payment illustration (USD)",
+                                       0.0, float(STARTING_CAPITAL),
                                        value=float(defaults.opening_cash), step=1000.0)
+        st.caption(PAYMENT_ILLUSTRATION_NOTE)
         dates = tuple(st.date_input(f"Illustrative payment {i}", day)
                       for i, day in enumerate(defaults.payment_dates, 1))
         starting = tuple(st.number_input(f"Starting {ticker} (%)", 0.0, 100.0,

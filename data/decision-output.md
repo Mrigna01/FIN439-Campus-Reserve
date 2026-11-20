@@ -28,18 +28,27 @@ Feasible grid mixes: 392 / 1,771.
 | Long-only within the ETF universe | Pass | Pass | Pass |
 | Net objective ≥ 5.50% | Fail | Pass | Pass |
 | Eligible reserve ≥ 4% | Pass | Fail | Pass |
-| Scholarship payment-date cash availability | Passes under stated assumptions | Fails | Passes under stated assumptions |
+| Standalone scholarship payment illustration | Passes under stated assumptions | Fails | Passes under stated assumptions |
 | Corporate issuer exposure ≤ 8% under case exemptions | Passes under stated assumptions | Passes under stated assumptions | Passes under stated assumptions |
 | Illustrative rebalance turnover (approval above 25%) | Approval required | Approval required | Passes under stated assumptions |
 | At least 90% redeemable within five business days | Not established | Not established | Not established |
 | Account permissions | Not established | Not established | Not established |
 | Annual review and cumulative turnover | Not established | Not established | Not established |
+| Portfolio payment readiness | Not established | Not established | Not established |
 
 ## Operational mandate evidence
 
 ### Equal weight
 
-**Scholarship payments · Passes under stated assumptions.** Four illustrative quarters use separate cash funded from the USD 1 million reserve, with ETF weights applied to the remainder. Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
+**Standalone scholarship payment illustration · Passes under stated assumptions.**
+
+**Portfolio payment readiness · Not established.**
+
+This is a standalone payment-planning illustration. Opening cash is deducted from the illustrative ETF holdings used in this schedule only. It does not update the main portfolio’s allocation, return, risk, reserve dollars, turnover, or liquidity assessment. These outputs describe separate scenarios and must not be combined.
+
+Illustrative opening cash \$0.00 + invested balance \$1,000,000.00 = total \$1,000,000.00. Initial eligible-security balance \$500,000.00 is part of the invested balance. The selected mix’s ETF weights apply to the remaining illustrative invested balance.
+
+Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
 
 Sales are planned two weekdays early. Weekend payments roll forward to Monday. An illustrative weekday calendar omits exchange and banking holidays, cutoffs and transfer delays. Normal proceeds are usable at T+1, consistent with standard [ETF settlement](https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/new-t1-settlement-cycle-what-investors-need-know-investor-bulletin). Delay assumes T+3; market loss assumes 5% lower sale prices for the same units throughout. No growth, dividends, account fees, execution costs or late payment catch-up are modeled. Opening cash is prior closing cash before crediting newly available proceeds.
 
@@ -109,7 +118,15 @@ Provider spreads are 30-day median quoted spreads relative to the midpoint ([mea
 
 ### 60/40 benchmark
 
-**Scholarship payments · Fails.** Four illustrative quarters use separate cash funded from the USD 1 million reserve, with ETF weights applied to the remainder. Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
+**Standalone scholarship payment illustration · Fails.**
+
+**Portfolio payment readiness · Not established.**
+
+This is a standalone payment-planning illustration. Opening cash is deducted from the illustrative ETF holdings used in this schedule only. It does not update the main portfolio’s allocation, return, risk, reserve dollars, turnover, or liquidity assessment. These outputs describe separate scenarios and must not be combined.
+
+Illustrative opening cash \$0.00 + invested balance \$1,000,000.00 = total \$1,000,000.00. Initial eligible-security balance \$0.00 is part of the invested balance. The selected mix’s ETF weights apply to the remaining illustrative invested balance.
+
+Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
 
 Sales are planned two weekdays early. Weekend payments roll forward to Monday. An illustrative weekday calendar omits exchange and banking holidays, cutoffs and transfer delays. Normal proceeds are usable at T+1, consistent with standard [ETF settlement](https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/new-t1-settlement-cycle-what-investors-need-know-investor-bulletin). Delay assumes T+3; market loss assumes 5% lower sale prices for the same units throughout. No growth, dividends, account fees, execution costs or late payment catch-up are modeled. Opening cash is prior closing cash before crediting newly available proceeds.
 
@@ -119,28 +136,28 @@ Before funding, confirm actual dates, balances, order execution, settlement and 
 
 | Payment | Opening cash | Sale date | Sale at reference prices | Proceeds | Available | Newly available cash | Due | Paid | Closing cash | Shortfall |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 2027-03-15 | \$0.00 | 2027-03-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-06-15 | \$0.00 | 2027-06-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-09-15 | \$0.00 | 2027-09-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-12-15 | \$0.00 | 2027-12-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-03-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-06-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-09-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-12-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
 
 **Delayed proceeds · Fails**
 
 | Payment | Opening cash | Sale date | Sale at reference prices | Proceeds | Available | Newly available cash | Due | Paid | Closing cash | Shortfall |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 2027-03-15 | \$0.00 | 2027-03-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-06-15 | \$0.00 | 2027-06-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-09-15 | \$0.00 | 2027-09-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-12-15 | \$0.00 | 2027-12-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-03-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-06-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-09-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-12-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
 
 **Market loss · Fails**
 
 | Payment | Opening cash | Sale date | Sale at reference prices | Proceeds | Available | Newly available cash | Due | Paid | Closing cash | Shortfall |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 2027-03-15 | \$0.00 | 2027-03-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-06-15 | \$0.00 | 2027-06-11 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-09-15 | \$0.00 | 2027-09-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
-| 2027-12-15 | \$0.00 | 2027-12-13 | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-03-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-06-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-09-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
+| 2027-12-15 | \$0.00 | — | — | \$0.00 | — | \$0.00 | \$10,000.00 | \$0.00 | \$0.00 | \$10,000.00 |
 
 **Issuer cap · Passes under stated assumptions.** Mapped company exposure: none mapped. Unmapped portfolio share 0.000%; conservative single-company upper bound 0.000% versus 8%.
 
@@ -175,7 +192,15 @@ Provider spreads are 30-day median quoted spreads relative to the midpoint ([mea
 
 ### Constrained
 
-**Scholarship payments · Passes under stated assumptions.** Four illustrative quarters use separate cash funded from the USD 1 million reserve, with ETF weights applied to the remainder. Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
+**Standalone scholarship payment illustration · Passes under stated assumptions.**
+
+**Portfolio payment readiness · Not established.**
+
+This is a standalone payment-planning illustration. Opening cash is deducted from the illustrative ETF holdings used in this schedule only. It does not update the main portfolio’s allocation, return, risk, reserve dollars, turnover, or liquidity assessment. These outputs describe separate scenarios and must not be combined.
+
+Illustrative opening cash \$0.00 + invested balance \$1,000,000.00 = total \$1,000,000.00. Initial eligible-security balance \$750,000.00 is part of the invested balance. The selected mix’s ETF weights apply to the remaining illustrative invested balance.
+
+Each sale targets USD 10,000 in pre-shock units from SGOV/SCHR pro rata, capped at remaining holdings. No automatic top-up or sale of other ETFs.
 
 Sales are planned two weekdays early. Weekend payments roll forward to Monday. An illustrative weekday calendar omits exchange and banking holidays, cutoffs and transfer delays. Normal proceeds are usable at T+1, consistent with standard [ETF settlement](https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/new-t1-settlement-cycle-what-investors-need-know-investor-bulletin). Delay assumes T+3; market loss assumes 5% lower sale prices for the same units throughout. No growth, dividends, account fees, execution costs or late payment catch-up are modeled. Opening cash is prior closing cash before crediting newly available proceeds.
 
@@ -255,7 +280,7 @@ The fixed column holds the original constrained weights. Risk uses each scenario
 
 Liquidity percentages are volume proxies. Account permissions are not established in every scenario.
 
-| Scenario | Mix | Cash (normal) | Issuer cap | Turnover | Normal liquidity proxy |
+| Scenario | Mix | Payment illustration (normal) | Issuer cap | Turnover | Normal liquidity proxy |
 |---|---|---|---|---|---|
 | VT estimate −1 percentage point | Constrained | Passes under stated assumptions | Passes under stated assumptions | 20.00% · Passes under stated assumptions | 100.0% · Not established |
 | VT estimate −1 percentage point | Original weights | Passes under stated assumptions | Passes under stated assumptions | 20.00% · Passes under stated assumptions | 100.0% · Not established |

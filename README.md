@@ -22,6 +22,8 @@ Open the local URL printed by Streamlit. Campus opens with 60 monthly returns, 1
 
 Open **Operational mandate evidence** to review scheduled scholarship cash, issuer exemptions and residual exposure, turnover, liquidity and account permissions for a selected mix. Edit the fictional payment dates, starting cash and starting ETF weights under **Illustrative operational inputs**. The report uses the checked-in defaults and runs offline. [Evidence snapshot](data/operational-evidence.json) · [Executed results](data/decision-output.md#operational-mandate-evidence)
 
+**Opening cash for standalone payment illustration (USD)** reduces the ETF balance in the payment schedule only. The selected ETF weights apply to the remaining illustrative invested balance. The main portfolio retains its full ETF allocation, with the same return, risk, reserve dollars, turnover and liquidity results. The illustration does not establish payment readiness for that portfolio.
+
 ## Reproduce and test
 
 With the environment activated, run these from the repository root.

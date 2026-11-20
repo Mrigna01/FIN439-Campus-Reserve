@@ -68,7 +68,7 @@ def render(inputs=DEFAULT, include_stress=True):
                          f"{weight_text} | {shift_text} | {stress_action(trial)} |")
         lines.extend(["", "### Operational checks by stress and allocation", "",
                       "Liquidity percentages are volume proxies. Account permissions are not established in every scenario.", "",
-                      markdown_table(("Scenario", "Mix", "Cash (normal)", "Issuer cap", "Turnover",
+                      markdown_table(("Scenario", "Mix", "Payment illustration (normal)", "Issuer cap", "Turnover",
                                       "Normal liquidity proxy"), (
                           (label, name, mix["checks"][RULES[0]], mix["checks"][RULES[1]],
                            f"{op['turnover']['turnover']:.2%} · {op['turnover']['status']}",

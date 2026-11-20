@@ -80,3 +80,25 @@ class OperationsTests(unittest.TestCase):
         self.assertNotEqual(new["issuer"]["upper"], original["issuer"]["upper"])
         self.assertNotEqual(new["turnover"]["turnover"], original["turnover"]["turnover"])
         self.assertNotEqual(new["liquidity"]["rows"], original["liquidity"]["rows"])
+
+    def test_payment_opening_cash_does_not_change_main_portfolio(self):
+        capital = campus.STARTING_CAPITAL
+        without_cash = campus.run(assumptions=Assumptions(opening_cash=0))
+        all_cash = campus.run(assumptions=Assumptions(opening_cash=capital))
+        base = without_cash["mixes"]["Constrained"]["operational"]
+        full = all_cash["mixes"]["Constrained"]["operational"]
+        self.assertEqual(base["cash_balances"], {"opening": 0, "invested": capital,
+                                                 "eligible": 750_000, "total": capital})
+        self.assertEqual(base["cash"]["Normal"][0]["sales"], {"SGOV": 10_000})
+        self.assertEqual(full["cash_balances"], {"opening": capital, "invested": 0,
+                                                 "eligible": 0, "total": capital})
+        for rows in full["cash"].values():
+            self.assertTrue(all(not row["sales"] and row["proceeds"] == 0 for row in rows))
+            self.assertEqual(rows[-1]["closing"], 960_000)
+        for name, base_mix in without_cash["mixes"].items():
+            cash_mix = all_cash["mixes"][name]
+            for field in ("weights", "before_cost", "net", "volatility", "reserve", "verdict"):
+                self.assertEqual(base_mix[field], cash_mix[field])
+            for field in ("issuer", "turnover", "liquidity"):
+                self.assertEqual(base_mix["operational"][field], cash_mix["operational"][field])
+        self.assertEqual(without_cash["action"], all_cash["action"])
