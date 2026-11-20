@@ -12,4 +12,4 @@ Reviewed the [assignment](https://github.com/CinderZhang/FIN43900-Fall2026/blob/
 | Locked experiment | Existing prediction AI-assisted; later wording edited after results | Immutable links and [pending AI-off worksheet](locked-prediction-template.md) |
 | Recommendation | Lab 15 proposed pilot without additional client costs | Cost-aware paper pilot, range and committee ask in [memo](decision-memo.md) |
 | Opening statements and video evidence | Prior README had a generic disclosure; no verified videos | README and memo disclosures; [scripts](video-scripts.md) prepared; recordings and transcripts pending |
-| Submission and access | Lab checkout links only | [Manifest](submission-manifest.md), with pending personal evidence and access verification |
+| Submission and access | Lab checkout links only | [Manifest](submission-manifest.md), with verified public repository access and pending video evidence |

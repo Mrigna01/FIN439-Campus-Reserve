@@ -1,10 +1,10 @@
 # Project 2 submission manifest
 
-The project repository is private. Repository access for the instructional team and video access are pending. The specific invitation identity, filename prefix and assignment deadline come from Brightspace.
+The project repository is public. The repository and its published submission files were verified to open without signing in, so the instructional team can access them directly. Video access is pending. Check Brightspace for the filename prefix and assignment deadline.
 
 | Artifact | Stable location | Status |
 |---|---|---|
-| Repository and launch instructions | [FIN439-Campus-Reserve](https://github.com/Mrigna01/FIN439-Campus-Reserve) · [README](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/README.md) | Private; confirm grader access |
+| Repository and launch instructions | [FIN439-Campus-Reserve](https://github.com/Mrigna01/FIN439-Campus-Reserve) · [README](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/README.md) | Public; signed-out access verified |
 | Visible executed output | [Decision output](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/data/decision-output.md) | Generated |
 | Optional deployed output | — | Local app only |
 | Research evolution | — | Not required for Project 2 |
@@ -25,7 +25,7 @@ The project repository is private. Repository access for the instructional team 
 | 2 | Campus Reserve — Code and Evidence | 5:00 | Pending | Architecture; inputs and financial math; reproduction; stress check; limitation | Pending |
 | 3 | Campus Reserve — Investment Committee | 5:00 | Pending | Live opening; recommendation and range; risk and reversal; committee ask | Pending |
 
-Record the actual titles, durations and timecodes once each YouTube link is final. Check the videos and captions in a signed-out browser. For the private repo, grant access to the instructional-team identity published on Brightspace and verify that identity can open the repository and file links.
+Record the actual titles, durations and timecodes once each YouTube link is final. Check the videos and captions in a signed-out browser.
 
 ## Frozen-file checklist
 
