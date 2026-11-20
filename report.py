@@ -4,6 +4,7 @@ import argparse
 from dataclasses import replace
 
 from campus import DEFAULT, TICKERS, load_snapshot, run, stress_action, stress_results
+from operations import RULES, load_evidence, markdown_table, operational_detail
 from portfolio import largest_weight_change
 
 
@@ -16,9 +17,11 @@ def summary(mix):
 
 def render(inputs=DEFAULT, include_stress=True):
     snapshot = load_snapshot()
-    baseline = run(snapshot=snapshot)
+    evidence = load_evidence()
+    baseline = run(snapshot=snapshot, evidence=evidence)
     initial = baseline["mixes"]["Constrained"]
-    result = baseline if inputs == DEFAULT else run(inputs, fixed_weights=initial["weights"], snapshot=snapshot)
+    result = baseline if inputs == DEFAULT else run(inputs, fixed_weights=initial["weights"],
+                                                     snapshot=snapshot, evidence=evidence)
     estimate, signal = result["estimate"], result["signal"]
     lines = [
         "# Campus Scholarship Reserve results", "",
@@ -47,18 +50,33 @@ def render(inputs=DEFAULT, include_stress=True):
     lines.extend(["| Rule | " + " | ".join(names) + " |", "|---|" + "---|" * len(names)])
     for rule in result["mixes"][names[0]]["checks"]:
         lines.append("| " + rule + " | " + " | ".join(result["mixes"][name]["checks"][rule] for name in names) + " |")
+    lines.extend(["", "## Operational mandate evidence", ""])
+    for name, mix in result["mixes"].items():
+        lines.extend([f"### {name}", "", operational_detail(mix["operational"], evidence, snapshot[2][-1]), ""])
     if include_stress:
         lines.extend(["", "## One-at-a-time stresses", "",
                       "The fixed column holds the original constrained weights. Risk uses each scenario's inputs.",
                       "", "| Input | Original weights | Reoptimized | New weights (SGOV/SCHR/USIG/VT) | Largest change | Action |",
                       "|---|---|---|---|---|---|"])
-        for label, trial in stress_results(snapshot, baseline).items():
+        stresses = stress_results(snapshot, baseline, evidence=evidence)
+        for label, trial in stresses.items():
             new = trial["mixes"].get("Constrained")
             delta = largest_weight_change(initial, new)
             weight_text = "/".join(f"{w:.0%}" for w in new["weights"]) if new else "—"
             shift_text = f"{delta:.0f} points" if delta is not None else "—"
             lines.append(f"| {label} | {summary(trial['mixes']['Original weights'])} | {summary(new)} | "
                          f"{weight_text} | {shift_text} | {stress_action(trial)} |")
+        lines.extend(["", "### Operational checks by stress and allocation", "",
+                      "Liquidity percentages are volume proxies. Account permissions are not established in every scenario.", "",
+                      markdown_table(("Scenario", "Mix", "Cash (normal)", "Issuer cap", "Turnover",
+                                      "Normal liquidity proxy"), (
+                          (label, name, mix["checks"][RULES[0]], mix["checks"][RULES[1]],
+                           f"{op['turnover']['turnover']:.2%} · {op['turnover']['status']}",
+                           f"{op['liquidity']['normal']:.1%} · {op['liquidity']['status']}")
+                          for label, trial in stresses.items()
+                          for name, mix in trial["mixes"].items()
+                          if name in ("Original weights", "Constrained")
+                          for op in (mix["operational"],)))])
         lines.extend(["", "Before funding, verify forward-looking assumptions, all open mandate rules and dated payouts. "
                       "Hold if the VT signal is unavailable or nonpositive. Stop if the pilot mix misses the "
                       "5.50% estimated net target or the reserve floor."])

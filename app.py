@@ -3,6 +3,7 @@
 import streamlit as st
 
 from campus import DEFAULT, Inputs, STARTING_CAPITAL, TICKERS, load_snapshot, run, stress_action, stress_results
+from operations import Assumptions, load_evidence, operational_detail
 from portfolio import largest_weight_change
 from report import summary
 
@@ -18,13 +19,29 @@ with st.sidebar:
     floor = st.number_input("Minimum eligible reserve (%)", min_value=0.0, max_value=100.0,
                             value=float(DEFAULT.reserve_floor_pct), step=1.0)
     st.caption("The 5.50% net target holds across scenarios.")
+    with st.expander("Illustrative operational inputs"):
+        defaults = Assumptions()
+        opening_cash = st.number_input("Opening available cash (USD)", 0.0, float(STARTING_CAPITAL),
+                                       value=float(defaults.opening_cash), step=1000.0)
+        dates = tuple(st.date_input(f"Illustrative payment {i}", day)
+                      for i, day in enumerate(defaults.payment_dates, 1))
+        starting = tuple(st.number_input(f"Starting {ticker} (%)", 0.0, 100.0,
+                                         value=weight * 100, step=1.0) / 100
+                         for ticker, weight in zip(TICKERS, defaults.starting_weights))
+        try:
+            assumptions = Assumptions(dates, opening_cash, starting)
+        except ValueError as error:
+            st.warning(f"{error} Operational displays use the default assumptions until the inputs are valid.")
+            assumptions = defaults
 
 try:
     snapshot = load_snapshot()
-    baseline = run(snapshot=snapshot)
+    evidence = load_evidence()
+    baseline = run(snapshot=snapshot, assumptions=assumptions, evidence=evidence)
     fixed = baseline["mixes"]["Constrained"]["weights"]
     inputs = Inputs(last_36=last_36, vt_shift_points=shift, cost_bp=cost, reserve_floor_pct=floor)
-    active = run(inputs, fixed_weights=fixed if inputs != DEFAULT else None, snapshot=snapshot)
+    active = (baseline if inputs == DEFAULT else
+              run(inputs, fixed_weights=fixed, snapshot=snapshot, assumptions=assumptions, evidence=evidence))
 except (OSError, ValueError, KeyError) as error:
     st.error(f"Cannot evaluate the snapshot or scenario: {error}")
     st.stop()
@@ -53,7 +70,7 @@ with st.expander("Mandate checks by portfolio", expanded=True):
     mixes = active["mixes"]
     st.table([{"Rule": rule, **{name: mix["checks"][rule] for name, mix in mixes.items()}}
               for rule in next(iter(mixes.values()))["checks"]])
-    st.caption("SGOV and SCHR count as classroom reserves. Open rules require operational evidence. "
+    st.caption("SGOV and SCHR count as classroom reserves. Operational statuses are separate from the modeled verdict. "
                "The case assumes a seven-year horizon and $10,000 quarterly distributions.")
 
 with st.expander("Point-in-time signal and data card", expanded=True):
@@ -70,7 +87,8 @@ with st.expander("Point-in-time signal and data card", expanded=True):
 
 with st.expander("One-at-a-time stresses"):
     rows = []
-    for label, trial in stress_results(snapshot, baseline).items():
+    stresses = stress_results(snapshot, baseline, assumptions, evidence)
+    for label, trial in stresses.items():
         new = trial["mixes"].get("Constrained")
         delta = largest_weight_change(baseline["mixes"]["Constrained"], new)
         rows.append({"Scenario": label, "Original weights": summary(trial["mixes"]["Original weights"]),
@@ -79,6 +97,17 @@ with st.expander("One-at-a-time stresses"):
                      "Largest move": f"{delta:.0f} points" if delta is not None else "—", "Action": stress_action(trial)})
     st.table(rows)
     st.caption("Review the original mix whenever it fails a rule, even if a new optimized allocation passes.")
+
+with st.expander("Operational mandate evidence"):
+    portfolios = dict(active["mixes"])
+    for scenario, trial in stresses.items():
+        for label in ("Original weights", "Constrained"):
+            if label in trial["mixes"]:
+                portfolios[f"{scenario} · {label}"] = trial["mixes"][label]
+    choices = list(portfolios)
+    selection = st.selectbox("Portfolio for operational review", choices,
+                             index=choices.index("Constrained") if "Constrained" in choices else 0)
+    st.markdown(operational_detail(portfolios[selection]["operational"], evidence, snapshot[2][-1]))
 
 with st.expander("Return and risk assumptions"):
     st.table([{"Fund": s["name"], "Annual return": f"{s['return']:.2%}",

@@ -9,7 +9,7 @@ The project repository is public. The repository and its published submission fi
 | Optional deployed output | — | Local app only |
 | Research evolution | — | Not required for Project 2 |
 | Decision memo | [decision-memo.md](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/docs/decision-memo.md) | Prepared |
-| Validation and AI use | [validation-and-ai-use.md](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/docs/validation-and-ai-use.md) | Locked AI-off record pending |
+| Validation and AI use | [validation-and-ai-use.md](https://github.com/Mrigna01/FIN439-Campus-Reserve/blob/main/docs/validation-and-ai-use.md) | 17 bp prediction snapshot and results recorded |
 | Video 1 | YouTube URL pending | Recording pending |
 | Transcript 1 | Pending `docs/transcript-video-1.txt` | Corrected timestamped text pending |
 | Video 2 | YouTube URL pending | Recording pending |
@@ -29,7 +29,7 @@ Record the actual titles, durations and timecodes once each YouTube link is fina
 
 ## Frozen-file checklist
 
-- [ ] Commit and push the AI-off prediction before execution. Preserve the output and complete the validation record.
+- [x] Record the 17 bp prediction snapshot and preserve the executed output and comparison.
 - [ ] Record and upload all three videos as Unlisted or Public. Correct captions and commit the matching timestamped transcript files.
 - [ ] Verify access links and replace pending fields. Record the frozen repository commit in the manifest or Brightspace submission.
 - [ ] Attach `decision-memo.md`, `validation-and-ai-use.md`, this manifest if requested as a file, and `transcript-video-1.txt`, `transcript-video-2.txt`, and `transcript-video-3.txt`. Include the repository link, GitHub artifact URLs and all three YouTube URLs.

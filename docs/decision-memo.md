@@ -14,7 +14,7 @@ The fictional $1 million reserve has a seven-year horizon and pays $10,000 quart
 | 60/40 benchmark | 0 / 0 / 40 / 60% | 7.08% | 11.59% | 0% | Misses reserve floor |
 | Constrained | 75 / 0 / 0 / 25% | 5.66% | 3.82% | 75% | Passes modeled rules |
 
-The benchmark carries forward the Lab 14 policy comparison of diversified global equity and investment-grade corporate bonds. Its fixed weights give the committee an interpretable risk comparison without relying on fitted estimates. It has no dedicated Treasury buffer. The constrained mix was selected from 1,771 fully invested five-point grid allocations, of which 392 passed the modeled rules. Liquidity, issuer exposure, turnover and dated payouts remain open.
+The benchmark carries forward the Lab 14 policy comparison of diversified global equity and investment-grade corporate bonds. Its fixed weights give the committee an interpretable risk comparison without relying on fitted estimates. It has no dedicated Treasury buffer. The constrained mix was selected from 1,771 fully invested five-point grid allocations, of which 392 passed the modeled rules. A later operational review adds an illustrative payout schedule, a dated issuer-exposure bound and a hypothetical one-rebalance turnover calculation. The modeled schedule covers the four normal payments and exposes timing and sale-price shortfalls under stress. Actual payouts, annual turnover and approved issuer classifications still require confirmation. Five-day liquidity and account permissions remain unestablished. [Operational results](../data/decision-output.md#operational-mandate-evidence)
 
 ## Limits and review triggers
 

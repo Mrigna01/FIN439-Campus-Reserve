@@ -1,0 +1,45 @@
+{
+  "retrieved": "2026-11-19",
+  "mandate": "https://github.com/Mrigna01/FIN439Project2/blob/15a6d0a3dd1bf883e264aa1d3a0f18596ad5c03b/lab13.md#project-2--own-client-mandate",
+  "settlement": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/new-t1-settlement-cycle-what-investors-need-know-investor-bulletin",
+  "spread_definition": "https://www.ecfr.gov/current/title-17/chapter-II/part-270/section-270.6c-11",
+  "funds": {
+    "SGOV": {
+      "issuer_as_of": "2026-11-18",
+      "issuer_source": "https://www.ishares.com/us/products/314116/sgov",
+      "issuer_note": "Provider sector breakdown: 99.47% U.S. Treasury debt and 0.53% investment company. Keep 0.54% unmapped (rounded-up allowance). Corporate issuer identities for that residual were unavailable.",
+      "issuer": {"exempt": 0.9946, "companies": {}},
+      "market_source": "https://www.ishares.com/us/products/314116/sgov",
+      "market_as_of": "2026-11-18",
+      "price": 100.60, "volume": 24331732, "window": "30-day average", "spread_pct": 0.01
+    },
+    "SCHR": {
+      "issuer_as_of": "2026-09-30",
+      "issuer_source": "https://www.schwabassetmanagement.com/products/schr?page=0",
+      "issuer_note": "Tracks the U.S. Treasury 3–10 Year Index. September security types show 99.84% U.S. government securities and 0.16% other investment companies. November 16 holdings show Treasury notes and a USD line; the calculation uses the older allocation and conservatively leaves 0.17% unclassified.",
+      "issuer": {"exempt": 0.9983, "companies": {}},
+      "market_source": "https://www.schwabassetmanagement.com/products/schr?page=0",
+      "market_as_of": "2026-09-10",
+      "price": 24.08, "volume": 5621956, "window": "single-day volume; opening price; historical", "spread_pct": 0.04,
+      "spread_window": "2026-08-10 to 2026-09-09"
+    },
+    "USIG": {
+      "issuer_as_of": "2026-11-18",
+      "issuer_source": "https://www.ishares.com/us/products/239460/ishares-credit-bond-etf",
+      "issuer_note": "Broad investment-grade corporate bond index; provider reported 11,696 holdings and describes diversified credit exposure. Treat as a diversified fund under the case exemption. Holding count is a diversification indicator, not an issuer count.",
+      "issuer": {"exempt": 1, "companies": {}, "policy_assumption": true},
+      "market_source": "https://www.ishares.com/us/products/239460/ishares-credit-bond-etf",
+      "market_as_of": "2026-11-18",
+      "price": 49.05, "volume": 1902857, "window": "30-day average", "spread_pct": 0.02
+    },
+    "VT": {
+      "issuer_as_of": "2026-09-30",
+      "issuer_source": "https://fund-docs.vanguard.com/F3141.pdf",
+      "issuer_note": "FTSE Global All Cap exposure with 10,185 stocks across developed and emerging markets. Apply the case diversified-fund exemption.",
+      "issuer": {"exempt": 1, "companies": {}, "policy_assumption": true},
+      "market_source": "https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf",
+      "market_as_of": "2026-10-08",
+      "price": 158.73, "volume": 2597924.93, "window": "25-day average shown with October 8 close; historical cached provider view", "spread_pct": 0.01
+    }
+  }
+}

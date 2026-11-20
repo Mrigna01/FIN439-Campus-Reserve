@@ -7,6 +7,7 @@ from math import isclose, isfinite
 from pathlib import Path
 
 import portfolio as portfolio
+from operations import Assumptions, assess, load_evidence
 
 ROOT = Path(__file__).resolve().parent
 TICKERS = ("SGOV", "SCHR", "USIG", "VT")
@@ -82,7 +83,7 @@ def trend_signal(dates, vt_prices, available_on, cutoff):
             "lag_days": (available_on - end).days}
 
 
-def evaluate(weights, sleeves, covariance, inputs):
+def evaluate(weights, sleeves, covariance, inputs, assumptions, evidence, reference_prices):
     before_cost = portfolio.expected_return(weights, sleeves)
     reserve = portfolio.reserve_weight(weights, sleeves)
     net = before_cost - inputs.annual_cost
@@ -97,17 +98,14 @@ def evaluate(weights, sleeves, covariance, inputs):
         checks["Case reserve ≥ 4%"] = "Pass" if reserve >= .04 - TOLERANCE else "Fail"
     if inputs.net_target_pct < DEFAULT.net_target_pct:
         checks["Case net objective ≥ 5.50%"] = "Pass" if net >= NET_TARGET - TOLERANCE else "Fail"
-    checks.update(dict.fromkeys((
-        "At least 90% redeemable within five business days",
-        "Company issuer exposure ≤ 8% under case exemptions",
-        "Annual rebalance and approval above 25% annual turnover",
-        "Cash available on scholarship payment dates",
-        "Underlying exposures and account permissions",
-    ), "Not established"))
+    verdict = "Fails modeled checks" if "Fail" in checks.values() else "Passes modeled checks"
+    operational = assess(dict(zip(TICKERS, weights)), (s["name"] for s in sleeves if s["reserve_eligible"]),
+                         STARTING_CAPITAL, QUARTERLY_PAYOUT, assumptions, evidence, reference_prices)
+    checks.update(operational["checks"])
     return {"weights": weights, "before_cost": before_cost, "net": net,
             "volatility": portfolio.portfolio_volatility(weights, covariance),
             "reserve": reserve, "checks": checks,
-            "verdict": "Fails modeled checks" if "Fail" in checks.values() else "Passes modeled checks"}
+            "operational": operational, "verdict": verdict}
 
 
 def recommendation(optimized, signal):
@@ -120,7 +118,8 @@ def recommendation(optimized, signal):
     return "Pilot on paper only. Hold any trades until assumptions and open checks are verified."
 
 
-def run(inputs=DEFAULT, fixed_weights=None, cutoff=DECISION_DATE, snapshot=None):
+def run(inputs=DEFAULT, fixed_weights=None, cutoff=DECISION_DATE, snapshot=None,
+        assumptions=Assumptions(), evidence=None):
     source, metadata, dates, prices = load_snapshot() if snapshot is None else snapshot
     availability = datetime.fromisoformat(metadata["downloaded_at_utc"]).date()
     if cutoff < availability or cutoff < dates[-1]:
@@ -140,16 +139,19 @@ def run(inputs=DEFAULT, fixed_weights=None, cutoff=DECISION_DATE, snapshot=None)
         weights["Constrained"] = candidate["weights"]
     if fixed_weights is not None:
         weights["Original weights"] = fixed_weights
-    mixes = {label: evaluate(mix, sleeves, covariance, inputs) for label, mix in weights.items()}
+    evidence = load_evidence() if evidence is None else evidence
+    reference_prices = dict(zip(TICKERS, prices[-1]))
+    mixes = {label: evaluate(mix, sleeves, covariance, inputs, assumptions, evidence, reference_prices)
+             for label, mix in weights.items()}
     optimized = mixes.get("Constrained")
     return {"estimate": estimate, "mixes": mixes, "candidate": candidate,
             "signal": signal, "action": recommendation(optimized, signal)}
 
 
-def stress_results(snapshot, baseline):
+def stress_results(snapshot, baseline, assumptions=Assumptions(), evidence=None):
     fixed = baseline["mixes"]["Constrained"]["weights"]
     return {
-        label: run(inputs, fixed_weights=fixed, snapshot=snapshot)
+        label: run(inputs, fixed_weights=fixed, snapshot=snapshot, assumptions=assumptions, evidence=evidence)
         for label, inputs in STRESSES.items()
     }
 

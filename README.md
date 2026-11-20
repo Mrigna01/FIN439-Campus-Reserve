@@ -20,6 +20,8 @@ python -m streamlit run app.py
 
 Open the local URL printed by Streamlit. Campus opens with 60 monthly returns, 10 bp additional annual cost, a 5.50% net return target, and a 4% reserve floor. Compare equal weight, the 60/40 benchmark and the constrained mix. Open **Mandate checks by portfolio** and change **Additional annual cost (bp)** to 30 to see the original pilot and reoptimized weights side by side. The **Point-in-time signal and data card** explains when the archived VT signal can be used.
 
+Open **Operational mandate evidence** to review scheduled scholarship cash, issuer exemptions and residual exposure, turnover, liquidity and account permissions for a selected mix. Edit the fictional payment dates, starting cash and starting ETF weights under **Illustrative operational inputs**. The report uses the checked-in defaults and runs offline. [Evidence snapshot](data/operational-evidence.json) · [Executed results](data/decision-output.md#operational-mandate-evidence)
+
 ## Reproduce and test
 
 With the environment activated, run these from the repository root.
@@ -33,7 +35,7 @@ To refresh the checked-in report from the same data, run `python report.py > dat
 
 ## Data and scope
 
-Yahoo Finance USD adjusted closes were retrieved October 22, 2026 and cover September 2021 through September 2026. Fund expenses are already reflected in the historical fund prices. The additional cost control is an illustrative uniform annual drag. No price refresh occurs automatically. Historical estimates, a single price vintage and a five-point allocation grid support a classroom pilot. The engine does not verify order liquidity, issuer look-through, turnover, or spending cash flows. [Sources, data card and validation](docs/validation-and-ai-use.md)
+Yahoo Finance USD adjusted closes were retrieved October 22, 2026 and cover September 2021 through September 2026. Fund expenses are already reflected in the historical fund prices. The additional cost control is an illustrative uniform annual drag. Historical estimates, a single price vintage and a five-point allocation grid support a classroom pilot. The operational review uses saved evidence and fictional inputs. Funding remains on hold pending client-specific verification. No data refresh occurs automatically. [Sources, data card and validation](docs/validation-and-ai-use.md)
 
 ## Reuse
 

@@ -26,7 +26,7 @@ As a cross-check, the U.S. Treasury's September 30, 2026 coupon-equivalent yield
 
 ## Stress evidence
 
-The [generated report](../data/decision-output.md) uses the same engine as the app. One change at a time is applied to the 60-return, 10 bp, 4%-reserve case. The fixed check answers whether the original pilot survives; the fresh search answers whether a different five-point allocation qualifies. Lower VT estimates and higher costs separately fail the original mix. The 36-return window keeps the original feasible and changes the lowest-risk weights. The 80% reserve stress has no feasible result. An unchecked mandate rule remains open across all scenarios.
+The [generated report](../data/decision-output.md) uses the same engine as the app. One change at a time is applied to the 60-return, 10 bp, 4%-reserve case. The fixed check answers whether the original pilot survives; the fresh search answers whether a different five-point allocation qualifies. Lower VT estimates and higher costs separately fail the original mix. The 36-return window keeps the original feasible and changes the lowest-risk weights. The 80% reserve stress has no feasible result. Five-day liquidity, account permissions, and annual cumulative turnover remain unestablished across the scenarios.
 
 ## Locked Changed-Input Record
 Authored at (UTC): 2026-11-19T22:23:08Z 
@@ -100,6 +100,16 @@ On November 17, 2026, my partner ran an authenticated fresh clone of [the app ev
 
 The earlier development run caught Streamlit resolving the test script path relative to the test file. Resolving the app path from the project root fixed it. The fresh run covered exact cost and reserve boundaries, the two baseline failures, weight validity, a hand-worked covariance example, bad price inputs, exclusion before vintage availability, an infeasible reserve floor, and report/app agreement on decision numbers.
 
+## Operational mandate evidence (November 19, 2026)
+
+The [Campus mandate](https://github.com/Mrigna01/FIN439Project2/blob/15a6d0a3dd1bf883e264aa1d3a0f18596ad5c03b/lab13.md#project-2--own-client-mandate) specifies $10,000 quarterly, cash or daily-liquid government securities for reserves, at least 90% redeemable within five business days, an 8% aggregate company cap with cash, U.S. Treasury and diversified-fund exemptions, and annual rebalancing with approval when annual turnover is above 25%. It supplies neither actual dates nor actual account holdings, orders or permissions.
+
+The [saved evidence](../data/operational-evidence.json) records source URLs, measurement dates, collection date and fund classifications. The [generated operational report](../data/decision-output.md#operational-mandate-evidence) shows the assumptions, calculated tables and next actions using the same functions as the app. This operational review is dated after the original portfolio decision and does not enter the point-in-time signal or portfolio search. The dated facts support the screening inputs. A normal payout schedule under a weekday calendar, a diversified-fund exemption interpretation and a no-flow rebalance are conditional. A historical volume screen uses mixed measurement windows and demonstrates trade scale without establishing execution or cash access. The cash and turnover exercises are independent and are not a combined trading or performance simulation.
+
+Before funding, confirm the scholarship calendar, available balances and custodian cutoffs; confirm the issuer exemption interpretation and refresh holdings; reconcile cumulative turnover and annual review with a trade and flow ledger; and obtain execution and account permission evidence. Retain the paper pilot and funding hold.
+
+Local automated verification in the original lab virtual environment passed all 10 pre-change tests and all 17 post-change tests. The expanded suite exercised cash timing and sale losses, incomplete issuer mapping, the exact turnover boundary and changes to the Streamlit controls. The generated default report matched the saved report byte for byte.
+
 ## Material AI uses
 
 | Date | Tool and exposed information | Use and disposition | Check |
@@ -107,3 +117,4 @@ The earlier development run caught Streamlit resolving the test script path rela
 | 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Adapted lab code, introduced uniform client cost, rule verdicts and common stress execution. Qualified the old pilot as paper-only. | Independent two-asset risk calculation, exact-boundary and cost tests, and app/report comparisons. |
 | 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Checked the prior assumption that an unchanged VT stress allocation was adequate. The earlier gross-style test left 5.51%; the modeled 10 bp base charge moves the same fixed stress to 5.41%. | Generated report and fixed-weight stress test; reviewed the original Lab 15 outputs. |
 | 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Adapted the lab cutoff concept to the real archived VT series, drafted supporting documents and recording scripts. | Tested archive cutoff and checked the GitHub commit objects and date order. |
+| 2026-11-19 | ChatGPT through Codex | Reviewed the original mandate and official fund and settlement sources. Implemented the operational schedule, issuer bound, turnover and liquidity screens plus their tests and documentation. Used dated fund evidence and explicit fictional starting conditions. | Baseline and expanded automated tests, saved report comparison and Streamlit control checks. This operational review was AI-assisted. |

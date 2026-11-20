@@ -1,7 +1,9 @@
+from datetime import date
 from pathlib import Path
 import unittest
 
 from streamlit.testing.v1 import AppTest
+from report import render
 
 
 class AppTests(unittest.TestCase):
@@ -20,3 +22,41 @@ class AppTests(unittest.TestCase):
         app.number_input[2].set_value(80).run()
         self.assertFalse(app.exception)
         self.assertIn("No feasible mix", app.warning[0].value)
+
+    def test_operational_detail_matches_report_and_reacts_to_controls(self):
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
+        self.assertFalse(app.exception)
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        self.assertIn(detail, render())
+        self.assertIn("20.00% one-way turnover", detail)
+
+        chooser = next(widget for widget in app.selectbox if widget.label == "Portfolio for operational review")
+        chooser.set_value("60/40 benchmark").run()
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        self.assertIn("**Scholarship payments · Fails.**", detail)
+        self.assertIn("70.00% one-way turnover", detail)
+
+        opening = next(widget for widget in app.number_input if widget.label == "Opening available cash (USD)")
+        opening.set_value(40_000.0).run()
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        self.assertIn("**Scholarship payments · Passes under stated assumptions.**", detail)
+
+        payment = next(widget for widget in app.date_input if widget.label == "Illustrative payment 1")
+        payment.set_value(date(2027, 3, 16)).run()
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        self.assertIn("| 2027-03-16 |", detail)
+
+        for label, value in (("Starting SGOV (%)", 50.0), ("Starting VT (%)", 30.0)):
+            next(widget for widget in app.number_input if widget.label == label).set_value(value)
+        chooser = next(widget for widget in app.selectbox if widget.label == "Portfolio for operational review")
+        chooser.set_value("Constrained").run()
+        detail = next(item.value for item in app.markdown if item.value.startswith("**Scholarship payments"))
+        self.assertIn("25.00% one-way turnover", detail)
+
+        lookback = next(widget for widget in app.selectbox if widget.label == "Lookback")
+        lookback.set_value("36 monthly returns").run()
+        shift = next(widget for widget in app.number_input if widget.label.startswith("VT annual return shift"))
+        shift.set_value(-1.0).run()
+        self.assertFalse(app.exception)
+        self.assertFalse(app.error)
+        self.assertIn("Original weights", app.table[0].value["Portfolio"].tolist())
