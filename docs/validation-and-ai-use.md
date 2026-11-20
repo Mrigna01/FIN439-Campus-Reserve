@@ -86,7 +86,7 @@ Evidence:
 
 ## Execution and cold run
 
-On November 17, 2026, Codex ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH. This was an agent run.
+On November 17, 2026, I ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH. This was an agent run.
 
 | Command or check | Result | Wall time |
 |---|---|---:|
