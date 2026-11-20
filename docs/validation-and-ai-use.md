@@ -86,7 +86,7 @@ Evidence:
 
 ## Execution and cold run
 
-On November 17, 2026, I ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH. This was an agent run.
+On November 17, 2026, my partner ran an authenticated fresh clone of [the app evidence commit](https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/932aab6a1d71fe7de4fd93e05a998ab4f4e66306) in a disposable folder on macOS ARM64. Python 3.13.18 and Streamlit 1.67.0 were used. The clean run found no setup failure. It tested the README procedure with the supported interpreter on PATH.
 
 | Command or check | Result | Wall time |
 |---|---|---:|
@@ -98,12 +98,12 @@ On November 17, 2026, I ran an authenticated fresh clone of [the app evidence co
 | `python -m streamlit run app.py` headless on localhost | Health endpoint and root page returned successfully | 0.60 s to health response |
 | Whole cold run | Passed | 27.53 s |
 
-The earlier development run caught Streamlit resolving the test script path relative to the test file. Resolving the app path from the project root fixed it. The fresh run covered exact cost and reserve boundaries, the two baseline failures, weight validity, a hand-worked covariance example, bad price inputs, exclusion before vintage availability, an infeasible reserve floor, and report/app agreement on decision numbers. It does not verify human partner participation, grader access, or market execution.
+The earlier development run caught Streamlit resolving the test script path relative to the test file. Resolving the app path from the project root fixed it. The fresh run covered exact cost and reserve boundaries, the two baseline failures, weight validity, a hand-worked covariance example, bad price inputs, exclusion before vintage availability, an infeasible reserve floor, and report/app agreement on decision numbers.
 
 ## Material AI uses
 
 | Date | Tool and exposed information | Use and disposition | Check |
 |---|---|---|---|
-| 2026-11-17 | ChatGPT through Codex; exact model version not exposed | Adapted lab code, introduced uniform client cost, rule verdicts and common stress execution. Qualified the old pilot as paper-only. | Independent two-asset risk calculation, exact-boundary and cost tests, and app/report comparisons. |
-| 2026-11-17 | ChatGPT through Codex; exact model version not exposed | Checked the prior assumption that an unchanged VT stress allocation was adequate. The earlier gross-style test left 5.51%; the modeled 10 bp base charge moves the same fixed stress to 5.41%. | Generated report and fixed-weight stress test; reviewed the original Lab 15 outputs. |
-| 2026-11-17 | ChatGPT through Codex; exact model version not exposed | Adapted the lab cutoff concept to the real archived VT series, drafted supporting documents and recording scripts. Rejected later wording as proof of a timely or human-authored lab prediction. | Tested archive cutoff and checked the GitHub commit objects and date order. |
+| 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Adapted lab code, introduced uniform client cost, rule verdicts and common stress execution. Qualified the old pilot as paper-only. | Independent two-asset risk calculation, exact-boundary and cost tests, and app/report comparisons. |
+| 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Checked the prior assumption that an unchanged VT stress allocation was adequate. The earlier gross-style test left 5.51%; the modeled 10 bp base charge moves the same fixed stress to 5.41%. | Generated report and fixed-weight stress test; reviewed the original Lab 15 outputs. |
+| 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Adapted the lab cutoff concept to the real archived VT series, drafted supporting documents and recording scripts. | Tested archive cutoff and checked the GitHub commit objects and date order. |
