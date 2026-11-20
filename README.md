@@ -24,6 +24,8 @@ Open **Operational mandate evidence** to review scheduled scholarship cash, issu
 
 **Opening cash for standalone payment illustration (USD)** reduces the ETF balance in the payment schedule only. The selected ETF weights apply to the remaining illustrative invested balance. The main portfolio retains its full ETF allocation, with the same return, risk, reserve dollars, turnover and liquidity results. The illustration does not establish payment readiness for that portfolio.
 
+The app opens in **Historical** mode. Select **Forward assumptions — illustrative** in the sidebar to compare sourced annual return proxies at the same 5.50% net hurdle, with historical covariance for risk. The November 19 forward scenario keeps the November 17 signal as historical evidence. [Source record](data/forward-assumptions.json) · [Forward results](data/forward-output.md)
+
 ## Reproduce and test
 
 With the environment activated, run these from the repository root.
@@ -31,6 +33,7 @@ With the environment activated, run these from the repository root.
 ```sh
 python -m unittest discover -s tests -v
 python report.py
+python report.py --forward
 ```
 
 To refresh the checked-in report from the same data, run `python report.py > data/decision-output.md`. The app and report use the same [scenario engine](campus.py) and [portfolio calculations](portfolio.py). Only the app and its smoke test require Streamlit, pinned in [requirements.txt](requirements.txt). The frozen price archive needs no API key or live download.

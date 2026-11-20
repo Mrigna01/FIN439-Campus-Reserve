@@ -119,14 +119,21 @@ def recommendation(optimized, signal):
 
 
 def run(inputs=DEFAULT, fixed_weights=None, cutoff=DECISION_DATE, snapshot=None,
-        assumptions=Assumptions(), evidence=None):
+        assumptions=Assumptions(), evidence=None, expected_returns=None):
     source, metadata, dates, prices = load_snapshot() if snapshot is None else snapshot
     availability = datetime.fromisoformat(metadata["downloaded_at_utc"]).date()
     if cutoff < availability or cutoff < dates[-1]:
         raise ValueError("The archived price vintage was not available by this decision date.")
-    signal = trend_signal(dates, [row[3] for row in prices], availability, cutoff)
+    signal = None
+    if expected_returns is None:
+        signal = trend_signal(dates, [row[3] for row in prices], availability, cutoff)
     estimate = portfolio.estimate_from_csv(source, last_36=inputs.last_36)
     sleeves, correlations = estimate["sleeves"], estimate["correlations"]
+    if expected_returns is not None:
+        if set(expected_returns) != set(TICKERS) or not all(isfinite(value) for value in expected_returns.values()):
+            raise ValueError("Expected returns must provide a finite decimal rate for every Campus fund.")
+        for sleeve in sleeves:
+            sleeve["return"] = expected_returns[sleeve["name"]]
     sleeves[3]["return"] += inputs.vt_shift_points / 100
     covariance = portfolio.covariance_matrix(sleeves, correlations)
     candidate = portfolio.search_portfolio(sleeves, correlations, inputs.net_target_pct / 100,

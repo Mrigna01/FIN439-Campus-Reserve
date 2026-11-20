@@ -112,6 +112,12 @@ Before funding, confirm the scholarship calendar, available balances and custodi
 
 Local automated verification in the original lab virtual environment passed all 10 pre-change tests and all 17 post-change tests. The expanded suite exercised cash timing and sale losses, incomplete issuer mapping, the exact turnover boundary and changes to the Streamlit controls. The generated default report matched the saved report byte for byte.
 
+## Forward assumptions (November 19, 2026)
+
+The [source record](../data/forward-assumptions.json) and [separate forward report](../data/forward-output.md) distinguish the input vintages, publication information, retrieval and analysis dates. Invesco’s USD arithmetic index total returns are used as nominal before-fund-expense proxies. The inputs deduct the provider expense ratios once. SGOV and SCHR use the older nearer-term-maturity index categories, while USIG and VT use the newer broad corporate and global equity estimates. The November 18 bill yield and dated fund yields are cross-checks. The optimizer uses historical ETF covariance and retains the 2.50% case inflation assumption and 5.50% net annual screen. A modeled pass cannot demonstrate rolling five-year CPI + 3% performance.
+
+The base retains 10 bp of recurring additional annual costs. The 0 and 30 bp scenarios bracket that assumption. Schwab’s April 2026 retail pricing guide informs the commission illustration. The separate 5–20 bp spread/slippage range is an analyst assumption per dollar traded and is excluded from annual returns. Custody, advisory fees, execution and account terms remain unverified. The November 17 signal is displayed only as historical evidence. The forward screen holds funding pending updated monitoring and resolution of operational checks.
+
 ## Material AI uses
 
 | Date | Tool and exposed information | Use and disposition | Check |
@@ -120,3 +126,4 @@ Local automated verification in the original lab virtual environment passed all 
 | 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Checked the prior assumption that an unchanged VT stress allocation was adequate. The earlier gross-style test left 5.51%; the modeled 10 bp base charge moves the same fixed stress to 5.41%. | Generated report and fixed-weight stress test; reviewed the original Lab 15 outputs. |
 | 2026-11-17 | ChatGPT through Codex (GPT-6.2-Sol, default) | Adapted the lab cutoff concept to the real archived VT series, drafted supporting documents and recording scripts. | Tested archive cutoff and checked the GitHub commit objects and date order. |
 | 2026-11-19 | ChatGPT through Codex | Reviewed the original mandate and official fund and settlement sources. Implemented the operational schedule, issuer bound, turnover and liquidity screens plus their tests and documentation. Used dated fund evidence and explicit fictional starting conditions. | Baseline and expanded automated tests, saved report comparison and Streamlit control checks. This operational review was AI-assisted. |
+| 2026-11-19 | ChatGPT through Codex | Researched and documented the forward return proxies and cost references, integrated the optional scenario through the existing engine, and added regression and scenario tests. | Checked publication and measurement dates and arithmetic versus geometric columns. Compared app and generated output. The forward work was AI-assisted. |

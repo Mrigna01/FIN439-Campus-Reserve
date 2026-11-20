@@ -6,6 +6,8 @@ These are proposed scripts. Use the opening statements only once you have review
 
 **Target 2:15, limit 3:00.**
 
+In the system-evolution segment, identify the external forward scenario as a later addition. Keep the original one-point VT calculation as the historical AI check.
+
 - **0:00–0:18 · Open on the repository.** “I used ChatGPT through Codex to help adapt my lab code, test the portfolio logic and prepare these materials. The analysis and decision are mine. This is for education, not investment advice.”
 - **0:18–0:55 · Show the old and new comparisons.** “The lab app compared two optimizer runs. That answered a stability question but left me without two transparent alternatives. The final app shows equal weight and the policy benchmark under the same inputs and rules as the optimizer.”
 - **0:55–1:45 · Show the AI check against the report.** “I checked whether the original pilot still met the target after a one-point cut to VT’s estimate. The earlier test showed 5.51% before additional client costs. The final case tests a net hurdle. I verified that subtracting 10 basis points yields 5.41%. The existing mix therefore fails even though the optimizer can find a new one.”
@@ -14,6 +16,8 @@ These are proposed scripts. Use the opening statements only once you have review
 ## Video 2 — Code walkthrough
 
 **Target 4:15, limit 5:00.**
+
+In the math and reproduction segments, identify historical returns as the default and show how the forward mode replaces the means in the shared engine while retaining historical covariance. Use `python report.py --forward` for the separate exhibit. Describe the VT gate as historical.
 
 - **0:00–0:18 · Open on the repository.** “I used ChatGPT through Codex for app implementation, test suggestions and documentation. The analysis and decision are mine. This is for education, not investment advice.”
 - **0:18–1:15 · Show data flow.** Open `prices.csv`, `load_snapshot` and the archive metadata. Explain the source cross-check, 61 month-end prices, 60 returns, USD convention and the decision boundary.
@@ -24,6 +28,8 @@ These are proposed scripts. Use the opening statements only once you have review
 ## Video 3 — Investment committee
 
 **Target 4:00, limit 5:00. Open with the app already running on screen.**
+
+Keep the historical live opening and cost stress. In the risk segment, show the November 19 forward comparison. The fixed pilot falls to 4.12% net against 5.50%, and the new modeled allocation carries 75% USIG and 7.79% historical-covariance volatility. Explain that the forward case strengthens the funding hold and requires updated monitoring.
 
 - **0:00–0:20 · Live app and opening.** “I used ChatGPT through Codex to help build and check this app. The analysis and decision are mine. This is for education, not investment advice. I’m asking for a paper pilot of 75% SGOV and 25% VT, with funding held.”
 - **0:20–1:20 · Live portfolio and mandate.** Show the three portfolios and open rule verdicts. Explain that equal weight misses the return target and the benchmark lacks eligible reserves. The selected mix estimates 5.66% net and 3.82% annual volatility at 10 bp modeled cost.

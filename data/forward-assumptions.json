@@ -1,0 +1,76 @@
+{
+  "analysis_date": "2026-11-19",
+  "retrieved": "2026-11-19",
+  "convention": "Nominal USD annual arithmetic index total returns over a 10-year projection. Treat index returns as before ETF expenses. Fund-level inputs deduct each published expense ratio once.",
+  "sources": {
+    "q1": {
+      "title": "Invesco 2026 Capital Market Assumptions — USD Q1 Update, Figure 6",
+      "url": "https://www.invesco.com/content/dam/invesco/apac/en/pdf/insights/2026/april/2026-invesco-capital-market-assumptions-usd-q1-2026.pdf",
+      "published": "April 2026 edition; exact day unavailable",
+      "as_of": "2025-12-31",
+      "available_by": "2026-11-19"
+    },
+    "q3": {
+      "title": "Invesco 2026 Capital Market Assumptions — USD Q3 Update, Figure 6",
+      "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+      "publication_url": "https://www.invesco.com/lu/en/insights/capital-markets-assumptions.html",
+      "published": "2026-10-12",
+      "as_of": "2026-06-30",
+      "available_by": "2026-10-12"
+    },
+    "bills": {
+      "title": "U.S. Treasury Daily Treasury Bill Rates — 13-week coupon equivalent",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202611&type=daily_treasury_bill_rates",
+      "published": "Daily series; separate release timestamp unavailable",
+      "as_of": "2026-11-18",
+      "available_by": "2026-11-19",
+      "value_pct": 4.26,
+      "definition": "Annualized nominal USD 13-week bill quotation before fund expenses; neither an arithmetic total-return forecast nor a compound return."
+    },
+    "broker": {
+      "title": "Charles Schwab Pricing Guide for Individual Investors",
+      "url": "https://www.schwab.com/legal/schwab-pricing-guide-for-individual-investors",
+      "published": "April 2026 edition; exact day unavailable",
+      "as_of": null,
+      "available_by": "2026-11-19",
+      "commission_usd": 0,
+      "definition": "Online commission per executed trade in eligible U.S. exchange-listed securities, subject to the guide’s conditions."
+    }
+  },
+  "funds": {
+    "SGOV": {
+      "cma": "q1", "proxy": "Bloomberg U.S. short Treasuries", "arithmetic_pct": 3.2, "geometric_pct": 3.2,
+      "expense_bp": 9, "fund_title": "iShares 0–3 Month Treasury Bond ETF product brief",
+      "fund_url": "https://www.blackrock.com/us/financial-professionals/literature/product-brief/ishares-us-treasury-bond-etfs-product-brief-en-us.pdf",
+      "fund_published": "Exact publication day unavailable", "fund_as_of": "2026-09-30", "fund_available_by": "2026-11-19",
+      "rationale": "Start with the 4.26% 13-week Treasury yield as a spot reference. Use the short-Treasury index projection for the base because rolling bills reinvest at future rates. The proxy need not match SGOV’s precise maturity range or seven-year horizon."
+    },
+    "SCHR": {
+      "cma": "q1", "proxy": "Bloomberg intermediate U.S. Treasuries", "arithmetic_pct": 4.0, "geometric_pct": 4.0,
+      "expense_bp": 3, "fund_title": "Schwab Intermediate-Term U.S. Treasury ETF fund profile",
+      "fund_url": "https://www.schwabassetmanagement.com/products/schr",
+      "fund_published": "Live profile; separate publication date unavailable", "fund_as_of": "2026-09-30", "fund_available_by": "2026-11-19",
+      "rationale": "Use the older, closer intermediate Treasury index proxy. Schwab reported 5.11% average yield to maturity on September 30 and 4.8 years effective duration on October 31, 2026. Yield to maturity describes the bonds at observed prices under yield assumptions. Rate moves, roll and reinvestment affect ETF total return."
+    },
+    "USIG": {
+      "cma": "q3", "proxy": "Bloomberg U.S. investment-grade corporate bonds", "arithmetic_pct": 5.6, "geometric_pct": 5.4,
+      "expense_bp": 4, "fund_title": "iShares Broad USD Investment Grade Corporate Bond ETF fund profile",
+      "fund_url": "https://www.ishares.com/us/products/239460/ishares-credit-bond-etf",
+      "fund_published": "Live profile; separate publication date unavailable", "fund_as_of": "2026-11-18", "fund_available_by": "2026-11-19",
+      "rationale": "Use a broad investment-grade total-return index proxy. iShares reported 5.95% average yield to maturity and 6.09 years effective duration on November 18. Yield and distribution measures do not capture future rate or spread moves, credit defaults and recoveries, or reinvestment. Bloomberg and USIG’s ICE index differ."
+    },
+    "VT": {
+      "cma": "q3", "proxy": "MSCI ACWI", "arithmetic_pct": 7.6, "geometric_pct": 6.4,
+      "expense_bp": 6, "fund_title": "Vanguard Total World Stock ETF fact sheet",
+      "fund_url": "https://fund-docs.vanguard.com/F3141.pdf",
+      "fund_published": "September 2026 edition; exact publication day unavailable", "fund_as_of": "2026-09-30", "fund_available_by": "2026-11-19",
+      "rationale": "Use the broad developed/emerging USD equity projection. MSCI ACWI covers large and mid caps, while VT follows FTSE Global All Cap and includes small caps. Currency, valuation, earnings, tracking and the 10-year versus seven-year horizon remain uncertain."
+    }
+  },
+  "analyst_costs": {
+    "annual_sensitivity_bp": [0, 30],
+    "one_time_spread_slippage_bp": [5, 20],
+    "vt_downside_points": -2,
+    "definition": "The base inherits 10 bp per year of additional portfolio-level cost. The 0–30 bp sensitivity is a recurring cost budget, with custody/advisory charges unverified. A separate 5–20 bp one-time spread/slippage illustration per dollar traded is excluded from annual returns. No executable quote, account terms or trade pattern are assumed."
+  }
+}
