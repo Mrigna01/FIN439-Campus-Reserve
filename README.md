@@ -49,4 +49,4 @@ The original [FIN439Project2 lab repository](https://github.com/Mrigna01/FIN439P
 - [Requirements audit](docs/requirements-audit.md)
 - [Submission manifest](docs/submission-manifest.md)
 - [Video scripts](docs/video-scripts.md)
-- [Locked prediction worksheet](docs/locked-prediction-template.md)
+- [Locked prediction worksheet](docs/validation-and-ai-use.md#locked-changed-input-record)
