@@ -46,10 +46,12 @@ The net-return target is 5.50%. I expect the original portfolio to remain above 
 Expected committee action:
 I would continue the paper pilot with funding held. The modeled return and reserve checks should still pass, but forward return assumptions and operational mandate checks still need verification.
 
+I wrote this prediction with AI off and committed it before running the 17 bp scenario.
+
 Prediction snapshot:
 https://github.com/Mrigna01/FIN439-Campus-Reserve/commit/27d745222fe4b6c37c0058303c4ae071a6f1e398
 
-### Actual practice results and comparison
+### Actual results and comparison
 
 Execution timestamp recorded before run (UTC): 2026-11-19T22:41:22Z
 Elapsed time: 0.073 seconds
@@ -69,7 +71,7 @@ remained 75%. Feasible grid allocations decreased
 from 392 to 380 out of 1,771.
 
 Comparison with prediction:
-The result matched the practice prediction. The uniform
+The result matched the locked prediction. The uniform
 cost increase reduced net return without changing estimated
 risk. The original minimum-volatility allocation still
 passed the return hurdle, so it remained the selected mix.
